@@ -1,0 +1,43 @@
+#! /usr/bin/env perl
+use strict;
+use warnings;
+
+use Test::More tests => 8;
+
+my $code_file = 'code';
+$ENV{PERL6LIB} = 'lib';
+my $perl6 = $ENV{PERL6EXECUTABLE} || 'perl6';
+
+sub run {
+    my ($input) = @_;
+
+    open my $INPUT, '>', 'input';
+    print {$INPUT} $input;
+    close $INPUT;
+
+    my $output = `$perl6 $code_file < input 2>&1`;
+    unlink 'input';
+
+    return $output;
+}
+
+die qq[NO FILE "$code_file"]
+    unless -e $code_file;
+
+die qq[\nFILE "$code_file" DOES NOT COMPILE]
+    if system("$perl6 -c $code_file > /dev/null");
+
+is run(""), "";
+is run("marmelade"), "Lines must be on the form '<name>: <utterance>'\n";
+is run("A: The quick brown fox."),
+    "Unrecognized utterance 'The quick brown fox.'\n";
+
+is run("A: A is a knight."), "Many solutions:\nA: knight\nA: knave\n";
+is run("A: A is a knave."), "No solutions.\n";
+
+is run("A: B is a knight."), "A mentions B but B doesn't say anything.\n";
+is run("A: A and C are of the same type."),
+    "A mentions C but C doesn't say anything.\n";
+
+is run("A: A and B are of the same type.\nB: A and B are of different types.\n"),
+    "A: knave; B: knight\n";

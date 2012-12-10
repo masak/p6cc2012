@@ -1,0 +1,49 @@
+#! /usr/bin/env perl
+use strict;
+use warnings;
+
+use Test::More tests => 5;
+
+my $code_file = 'code';
+$ENV{PERL6LIB} = 'lib';
+my $perl6 = $ENV{PERL6EXECUTABLE} || 'perl6';
+
+sub run {
+    my $output = `$perl6 $code_file 2>&1`;
+
+    return $output;
+}
+
+sub conforms {
+    my ($output) = @_;
+
+    # A haiku has three lines
+    my @lines = split /\n/, $output;
+    return unless @lines == 3;
+
+    # All lines should be of the same length
+    return unless length($lines[0]) == length($lines[1])
+               && length($lines[0]) == length($lines[2]);
+
+    # No double spaces
+    return if $output =~ /  /;
+
+    # No punctuation
+    $output =~ s/[[:alpha:]]//g;
+    $output =~ s/ //g;
+    $output =~ s/\n//g;
+    return if $output;
+
+    return 1;
+}
+
+die qq[NO FILE "$code_file"]
+    unless -e $code_file;
+
+die qq[\nFILE "$code_file" DOES NOT COMPILE]
+    if system("$perl6 -c $code_file > /dev/null");
+
+# Let's just test it five times
+for (1..5) {
+    ok conforms(run);
+}

@@ -1,0 +1,60 @@
+#! /usr/bin/env perl
+use strict;
+use warnings;
+
+use Test::More tests => 7;
+
+my $code_file = 'code';
+$ENV{PERL6LIB} = 'lib';
+my $perl6 = $ENV{PERL6EXECUTABLE} || 'perl6';
+
+sub run {
+    my ($input) = @_;
+
+    open my $INPUT, '>', 'input';
+    print {$INPUT} $input;
+    close $INPUT;
+
+    my $output = `$perl6 $code_file < input 2>&1`;
+    unlink 'input';
+
+    return $output;
+}
+
+die qq[NO FILE "$code_file"]
+    unless -e $code_file;
+
+die qq[\nFILE "$code_file" DOES NOT COMPILE]
+    if system("$perl6 -c $code_file > /dev/null");
+
+is run(""), "Please supply a positive integer on the first line\n";
+is run("foo"), "Please supply a positive integer on the first line\n";
+is run("1\n2\n3"), "Too many lines of input -- expected two lines\n";
+
+is run(<<'INPUT'), <<'OUTPUT';
+5
+
+INPUT
+() () () () ()
+OUTPUT
+
+is run(<<'INPUT'), <<'OUTPUT';
+3
+1.0 1.0 1.0
+INPUT
+(1.0) (1.0) (1.0)
+OUTPUT
+
+is run(<<'INPUT'), <<'OUTPUT';
+2
+1.0 2.0 3.0 4.0
+INPUT
+(1.0 4.0) (2.0 3.0)
+OUTPUT
+
+is run(<<'INPUT'), <<'OUTPUT';
+3
+1 2
+INPUT
+(1) (2) ()
+OUTPUT
