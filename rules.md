@@ -11,7 +11,7 @@
 
 * If there's a single contestant in the winning set, that contestant wins.
 
-* Otherwise, the choice of winner is made by us (masak & moritz) based as
+* Otherwise, the choice of winner is made by me (masak) based as
   much as possible on code quality.
 
 Since "code quality" is a slightly subjective measure, let us provide a few
