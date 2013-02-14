@@ -4,7 +4,7 @@ use warnings;
 
 use Test::More tests => 8;
 
-my $code_file = 'code';
+my $code_file = (shift @ARGV) || 'code';
 $ENV{PERL6LIB} = 'lib';
 my $perl6 = $ENV{PERL6EXECUTABLE} || 'perl6';
 
