@@ -2,7 +2,7 @@
 
 [t1. Tell knights from knaves based on what they say.](https://github.com/masak/p6cc2012/tree/master/t1/reviews)
 
-t2. Generate rectangle haikus.
+[t2. Generate rectangle haikus.](https://github.com/masak/p6cc2012/tree/master/t2/reviews)
 
 t3. Arrange wire crossings to rearrange wires.
 
