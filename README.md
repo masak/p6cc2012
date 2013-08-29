@@ -4,7 +4,7 @@
 
 [t2. Generate rectangle haikus.](https://github.com/masak/p6cc2012/tree/master/t2/reviews)
 
-t3. Arrange wire crossings to rearrange wires.
+[t3. Arrange wire crossings to rearrange wires.](https://github.com/masak/p6cc2012/tree/master/t3/reviews)
 
 t4. Simulate rain in a world of cubes.
 
