@@ -97,8 +97,7 @@ matter of taste, I guess.
 ## Clarity of intent
 
 If I were to describe the style of this program in one word, I'd call it
-"APL-ish". `:-)` Some of the operations in the program fit that kind of
-thinking very nicely, for example when you realize that
+"APL-ish". `:-)`.
 
 One tip: If you find yourself leaving a comment such as this one:
 
