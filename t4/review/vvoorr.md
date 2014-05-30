@@ -132,5 +132,5 @@ become one.
 
 ## Brevity
 
-Admiringly short, recursive solution. Then again, it gets many of the cases
+Admirably short, recursive solution. Then again, it gets many of the cases
 wrong.
