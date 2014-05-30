@@ -6,7 +6,7 @@
 
 [t3. Arrange wire crossings to rearrange wires.](https://github.com/masak/p6cc2012/tree/master/t3/reviews)
 
-t4. Simulate rain in a world of cubes.
+[t4. Simulate rain in a world of cubes.](https://github.com/masak/p6cc2012/tree/master/t4/reviews)
 
 t5. Distribute weights in bags evenly.
 
